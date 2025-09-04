@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oseltamivir Dosing (เด็ก/ผู้ใหญ่)</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-256.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#ffe7b3">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="appbar">
+    <img src="icon-192.png" alt="" class="brand">
+    <div class="titleWrap">
+      <div class="title">OSEL · โปรแกรมคำนวณ Oseltamivir</div>
+      <div class="subtitle">เด็ก / ผู้ใหญ่ (≥13 ปีถือเป็นผู้ใหญ่)</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>ใส่ข้อมูลผู้ป่วย</h2>
+
+      <div class="row">
+        <label>อายุ (ปี)<input id="ageYears" type="number" min="0" value="2" /></label>
+        <label>อายุ (เดือน)<input id="ageMonths" type="number" min="0" max="11" value="0" /></label>
+        <label>น้ำหนัก (กก.)<input id="weight" type="number" min="0" step="0.1" value="12" /></label>
+        <label>จำนวนวันรักษา<input id="days" type="number" min="1" value="5" /></label>
+      </div>
+
+      <div class="row inline">
+        <label class="check"><input id="renalChk" type="checkbox" /> ไตบกพร่อง (CrCl)</label>
+        <label class="check"><input id="hdChk" type="checkbox" /> ขนาดยา Hemodialysis (HD)</label>
+      </div>
+
+      <div id="renalFields" class="row hidden">
+        <label>เพศ
+          <select id="sex"><option value="male">ชาย</option><option value="female">หญิง</option></select>
+        </label>
+        <label>Serum Creatinine (mg/dL)
+          <input id="scr" type="number" min="0" step="0.01" value="1.0" />
+        </label>
+      </div>
+
+      <div id="hdFields" class="row hidden">
+        <label>จำนวนรอบฟอกไตในช่วงรักษา
+          <input id="hdSessions" type="number" min="1" value="3" />
+        </label>
+      </div>
+
+      <button id="calcBtn" class="primary">คำนวณขนาดยา</button>
+
+      <div id="doseResult" class="result"></div>
+      <div id="renalNote" class="warn"></div>
+    </section>
+
+    <section class="card">
+      <h2>เลือกรูปแบบยา</h2>
+      <div class="drugOptions">
+        <div class="drugMini">
+          <label class="check"><input type="checkbox" class="drugSel" value="cap30"> แคปซูล 30 mg</label>
+          <div class="sub">
+            <label class="check"><input type="checkbox" id="mix_cap30"> ละลายน้ำ ≤10 mL</label>
+          </div>
+        </div>
+        <div class="drugMini">
+          <label class="check"><input type="checkbox" class="drugSel" value="cap75"> แคปซูล 75 mg</label>
+          <div class="sub">
+            <label class="check"><input type="checkbox" id="mix_cap75"> ละลายน้ำ ≤10 mL</label>
+          </div>
+        </div>
+        <div class="drugMini">
+          <label class="check"><input type="checkbox" class="drugSel" value="syrup"> ยาน้ำ 10 mg/mL</label>
+          <div class="sub muted">30 mL/ขวด</div>
+        </div>
+      </div>
+      <p class="hint">* ไม่ติ๊ก “ละลายน้ำ”: ให้เป็นเสี้ยวเม็ด/แบ่งแคปซูลตามขนาดที่ต้องการ และทิ้งส่วนที่เหลือทุกครั้ง</p>
+      <p class="hint">* ติ๊ก “ละลายน้ำ”: ใช้จำนวนแคปซูลเต็มเม็ด/ครั้ง (ปัดขึ้น) ผสมน้ำ ≤10 mL/ครั้ง, ให้เฉพาะปริมาณที่ต้องการแล้วทิ้งส่วนที่เหลือ</p>
+    </section>
+
+    <section class="card">
+      <h2>ตารางสรุปสำหรับบุคลากร</h2>
+      <div id="summaryMeta" class="meta"></div>
+      <div class="tableWrap">
+        <table id="summaryTable">
+          <thead><tr>
+            <th>รายการยา</th><th>ความแรง/ความเข้มข้น</th><th>ขนาดต่อครั้ง</th>
+            <th>ความถี่</th><th>ระยะเวลา</th><th>ปริมาณต่อครั้ง</th><th>รวมทั้งหมด</th><th>หมายเหตุ/วิธีผสม</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="actions">
+        <button id="printBtn">พิมพ์ตารางสรุป</button>
+        <button id="clearBtn" class="ghost">ล้างข้อมูล</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© OSEL – Oseltamivir dosing helper</footer>
+  <script defer src="app.js"></script>
+</body>
+</html>

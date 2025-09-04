@@ -1,0 +1,26 @@
+/* Compact, horizontal, responsive */
+:root{--bg:#fffdfa;--card:#ffffff;--ink:#222;--muted:#6b6b6b;--accent:#ffe7b3;--accent-ink:#5a4300;--line:#ececec}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,'Noto Sans Thai',sans-serif}
+.appbar{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;background:linear-gradient(0deg,var(--accent),#fff3d6);color:var(--accent-ink);padding:10px 14px;border-bottom:1px solid rgba(0,0,0,.06)}
+.appbar .brand{width:28px;height:28px;border-radius:6px}
+.titleWrap{display:flex;flex-direction:column}.title{font-weight:800}.subtitle{font-size:.9rem;opacity:.8}
+.container{max-width:1000px;margin:14px auto;padding:0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+h2{margin:0 0 8px 0;font-size:1.05rem}
+.row{display:flex;flex-wrap:wrap;gap:10px}.row.inline{align-items:center}
+.row>label{flex:1 1 200px;display:flex;flex-direction:column;gap:6px;font-weight:600}
+input,select{padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.check{display:flex;align-items:center;gap:8px;font-weight:600}
+.result{margin-top:8px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#f9fafb}.warn{color:#b24a00;margin-top:6px}
+.drugOptions{display:flex;gap:10px;flex-wrap:wrap}
+.drugMini{flex:1 1 260px;min-width:220px;border:1px dashed var(--line);border-radius:12px;padding:10px 12px;background:#fff}
+.drugMini .sub{margin-top:6px}.muted{color:var(--muted)}
+.tableWrap{overflow:auto;border:1px solid var(--line);border-radius:10px;margin-top:6px}
+table{width:100%;border-collapse:collapse}thead th{position:sticky;top:0;background:#f6f6f6}
+th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left}
+.actions{display:flex;gap:8px;margin-top:10px}.ghost{background:transparent;border:1px dashed var(--line);border-radius:10px;padding:10px 14px;color:#555}
+.primary{background:#222;color:#fff;border:0;border-radius:10px;padding:10px 14px}
+.hidden{display:none}.footer{font-size:.9rem;color:var(--muted);text-align:center;margin:16px 0 24px}
+@media (min-width:900px){.row>label{flex:1 1 240px}.drugMini{flex:1 1 300px}}
+@media print{header,.card:not(:has(#summaryTable)), .footer{display:none !important}.card:has(#summaryTable){border:0;box-shadow:none}#summaryTable{font-size:12pt}}
